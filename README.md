@@ -2,7 +2,7 @@
 
 JPA PostgreSQL Spring Service Example
 =========================================
-This is a [**Spring Cloud**](http://projects.spring.io/spring-cloud/) based microservice example backed by
+This is a [**Spring Boot**](https://projects.spring.io/spring-boot/) based microservice example backed by
 [**PostgreSQL**](https://www.postgresql.org/) database. This examples shows the following:
 * Use `spring.datasource` properties and Spring Data auto configuration.
 * How to use JPA's `CrudRepository`
