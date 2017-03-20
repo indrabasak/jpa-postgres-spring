@@ -62,7 +62,7 @@ public class PGEnumUserType implements EnhancedUserType, ParameterizedType {
             return null;
         }
 
-        // Converts a PostGrem Enum from PGobject to Java Enum
+        // Converts a PostGres Enum from PGobject to Java Enum
         if (object instanceof PGobject) {
             PGobject pg = (PGobject) object;
             return Enum.valueOf(enumClass, pg.getValue());
@@ -75,10 +75,9 @@ public class PGEnumUserType implements EnhancedUserType, ParameterizedType {
             SessionImplementor session) throws HibernateException, SQLException {
         if (value == null) {
             st.setNull(index, Types.VARCHAR);
-            // UPDATE: To support NULL insertion, change to: st.setNull(index, 1111);
         } else {
-            // Notice 1111 which java.sql.Type for Postgres Enum
-            st.setObject(index, ((Enum) value), 1111);
+            // Types.OTHER (1111) gets mapped to Postgres Enum
+            st.setObject(index, ((Enum) value), Types.OTHER);
         }
     }
 
@@ -97,7 +96,6 @@ public class PGEnumUserType implements EnhancedUserType, ParameterizedType {
 
     public int[] sqlTypes() {
         return new int[]{Types.VARCHAR};
-        // UPDATE: To support NULL insertion, change to: return new int[] { 1111 };
     }
 
     public Object fromXMLString(String xmlValue) {

@@ -52,18 +52,19 @@ public class BookService {
 
     public Book getById(UUID id) {
         BookEntity entity = repo.findOne(id);
-        Book book = mapper.map(entity, Book.class);
-
-        return book;
+        return map(entity);
     }
 
     public List<Book> get(String title, String author, Genre genre) {
         if (title != null && author == null && genre == null) {
             return map(repo.findByTitleIgnoreCase(title));
         } else if (title != null && author != null && genre == null) {
-            return map(repo.findByTitleIgnoreCaseAndAuthorIgnoreCase(title, author));
+            return map(repo.findByTitleIgnoreCaseAndAuthorIgnoreCase(title,
+                    author));
         } else if (title != null && author != null && genre != null) {
-            return map(repo.findByTitleIgnoreCaseAndAuthorIgnoreCaseAndGenre(title, author, genre));
+            return map(
+                    repo.findByTitleIgnoreCaseAndAuthorIgnoreCaseAndGenre(title,
+                            author, genre));
         } else if (title == null && author != null && genre == null) {
             return map(repo.findByAuthorIgnoreCase(author));
         } else if (title == null && author != null && genre != null) {
@@ -95,5 +96,13 @@ public class BookService {
         return entities.stream().map(
                 r -> mapper.map(r, Book.class)).collect(
                 Collectors.toList());
+    }
+
+    private Book map(BookEntity entity) {
+        if (entity == null) {
+            throw new InvalidSearchException("Book not found!");
+        }
+
+        return mapper.map(entity, Book.class);
     }
 }
