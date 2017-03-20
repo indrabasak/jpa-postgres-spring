@@ -10,7 +10,7 @@
     <artifactId>jpa-postgres-spring-model</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
-    <name>Postgres Spring Model</name>
+    <name>JPA Postgres Spring Model</name>
 
     <build>
         <plugins>

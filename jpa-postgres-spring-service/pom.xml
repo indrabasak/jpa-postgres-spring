@@ -11,7 +11,7 @@
     <artifactId>jpa-postgres-spring-service</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
-    <name>Postgres Spring Service</name>
+    <name>JPA Postgres Spring Service</name>
 
     <dependencies>
         <dependency>
