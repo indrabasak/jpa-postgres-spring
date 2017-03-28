@@ -43,7 +43,7 @@ public class BookEntity implements Serializable {
     private String author;
 
     @Column(name = "genre", nullable = false)
-    @Type(type = "com.basaki.example.postgres.spring.data.entity.PGEnumUserType",
+    @Type(type = "com.basaki.example.postgres.spring.data.usertype.PGEnumUserType",
             parameters = {@Parameter(name = "enumClassName",
                     value = "com.basaki.example.postgres.spring.model.Genre")})
     private Genre genre;

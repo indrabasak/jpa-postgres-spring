@@ -26,11 +26,8 @@ Execute the following command from the parent directory:
 mvn clean install
 ```
 
-[travis-badge]: https://travis-ci.org/indrabasak/postgres-examples.svg?branch=master
-[travis-badge-url]: https://travis-ci.org/indrabasak/postgres-examples/
-
 ### Start the Service
-The main entry point `geode-spring-service` example is `com.basaki.example.postgres.spring.book.BookApplication` class.
+The main entry point `jpa-postgres-spring` example is `com.basaki.example.postgres.boot.BookApplication` class.
 You can start the application from an IDE by starting the `BookApplication` class.
 ```
 

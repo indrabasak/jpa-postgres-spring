@@ -1,4 +1,4 @@
-package com.basaki.example.postgres.spring.data.entity;
+package com.basaki.example.postgres.spring.data.usertype;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;
