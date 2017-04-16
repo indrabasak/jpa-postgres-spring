@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 /**
@@ -39,9 +40,7 @@ public class BookService {
     }
 
     public Book create(BookRequest request) {
-        Assert.notNull(request.getTitle(), "Title can't be null!");
-        Assert.notNull(request.getAuthor(), "Author can't be null!");
-        Assert.notNull(request.getGenre(), "Genre can't be null!");
+        validate(request);
 
         BookEntity entity = mapper.map(request, BookEntity.class);
         entity = repo.save(entity);
@@ -79,6 +78,24 @@ public class BookService {
         }
     }
 
+    @Transactional
+    public Book update(UUID id, BookRequest request) {
+        BookEntity entity = repo.findOne(id);
+
+        if (entity == null) {
+            throw new DataNotFoundException(
+                    "Book with id " + id + " not found!");
+        }
+
+        validate(request);
+        mapper.map(request, entity);
+        entity = repo.save(entity);
+
+        Book book = mapper.map(entity, Book.class);
+
+        return book;
+    }
+
     public void delete(UUID id) {
         repo.delete(id);
     }
@@ -96,6 +113,12 @@ public class BookService {
         return entities.stream().map(
                 r -> mapper.map(r, Book.class)).collect(
                 Collectors.toList());
+    }
+
+    private void validate(BookRequest request) {
+        Assert.notNull(request.getTitle(), "Title can't be null!");
+        Assert.notNull(request.getAuthor(), "Author can't be null!");
+        Assert.notNull(request.getGenre(), "Genre can't be null!");
     }
 
     private Book map(BookEntity entity) {

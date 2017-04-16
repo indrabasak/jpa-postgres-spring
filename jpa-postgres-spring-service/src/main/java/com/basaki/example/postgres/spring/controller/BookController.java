@@ -85,6 +85,19 @@ public class BookController {
         return service.get(title, author, genre);
     }
 
+    @ApiOperation(value = "Updates a book.", response = Book.class)
+    @ApiResponses({
+            @ApiResponse(code = 201, response = Book.class,
+                    message = "Updated a book created successfully")})
+    @RequestMapping(method = RequestMethod.PUT, value = BOOK_BY_ID_URL,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public Book update(@PathVariable("id") UUID id,
+            @RequestBody BookRequest request) {
+        return service.update(id, request);
+    }
+
     @ApiOperation(value = "Deletes a book by ID.")
     @RequestMapping(method = RequestMethod.DELETE, value = BOOK_BY_ID_URL)
     @ResponseBody
