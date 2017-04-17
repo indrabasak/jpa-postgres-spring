@@ -49,12 +49,12 @@ public class BookService {
         return book;
     }
 
-    public Book getById(UUID id) {
+    public Book read(UUID id) {
         BookEntity entity = repo.findOne(id);
         return map(entity);
     }
 
-    public List<Book> get(String title, String author, Genre genre) {
+    public List<Book> read(String title, String author, Genre genre) {
         if (title != null && author == null && genre == null) {
             return map(repo.findByTitleIgnoreCase(title));
         } else if (title != null && author != null && genre == null) {

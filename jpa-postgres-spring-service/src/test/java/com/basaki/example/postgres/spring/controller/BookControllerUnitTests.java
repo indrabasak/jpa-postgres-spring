@@ -49,24 +49,24 @@ public class BookControllerUnitTests {
     }
 
     @Test
-    public void testGetById() {
+    public void testReadById() {
         Book book = getBook();
-        when(service.getById(any(UUID.class))).thenReturn(book);
+        when(service.read(any(UUID.class))).thenReturn(book);
 
-        Book returnedObj = controller.getById(book.getId());
+        Book returnedObj = controller.read(book.getId());
         validate(book, returnedObj);
     }
 
     @Test
-    public void testGet() {
+    public void testRead() {
         Book book = getBook();
         List<Book> books = new ArrayList<>();
         books.add(book);
-        when(service.get(any(String.class), any(String.class),
+        when(service.read(any(String.class), any(String.class),
                 any(Genre.class))).thenReturn(books);
 
         List<Book> returnedObjs =
-                controller.get("title", "author", Genre.DRAMA);
+                controller.read("title", "author", Genre.DRAMA);
         assertEquals(1, returnedObjs.size());
         validate(book, returnedObjs.get(0));
     }

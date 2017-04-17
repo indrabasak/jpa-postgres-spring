@@ -68,8 +68,8 @@ public class BookController {
     @RequestMapping(method = RequestMethod.GET, value = BOOK_BY_ID_URL,
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public Book getById(@PathVariable("id") UUID id) {
-        return service.getById(id);
+    public Book read(@PathVariable("id") UUID id) {
+        return service.read(id);
     }
 
     @ApiOperation(
@@ -78,11 +78,11 @@ public class BookController {
     @RequestMapping(method = RequestMethod.GET, value = BOOK_URL,
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public List<Book> get(
+    public List<Book> read(
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "author", required = false) String author,
             @RequestParam(value = "genre", required = false) Genre genre) {
-        return service.get(title, author, genre);
+        return service.read(title, author, genre);
     }
 
     @ApiOperation(value = "Updates a book.", response = Book.class)
